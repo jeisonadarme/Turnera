@@ -1,0 +1,740 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbMagicCraftingTurneraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="mas_tblEstadoServicio">
+          <Key>
+            <PropertyRef Name="IdEstadoServicio" />
+          </Key>
+          <Property Name="IdEstadoServicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEstadoServicio" Type="nvarchar" MaxLength="100" />
+          <Property Name="EsActivo" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PushRegistrationId" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblEmpleado">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdUsuario" Type="nvarchar" MaxLength="128" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NumeroCelular" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EsActivo" Type="bit" />
+          <Property Name="IdEmpresa" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="tblEmpresa">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdUsuario" Type="nvarchar" MaxLength="128" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TokenUnico" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UrlImagen" Type="nvarchar(max)" />
+          <Property Name="NumeroTelefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="NumeroCelular" Type="nvarchar" MaxLength="20" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Longitud" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Latitud" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblServicio">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdEmpleado" Type="uniqueidentifier" />
+          <Property Name="IdTipoServicio" Type="int" />
+          <Property Name="IdEstadoServicio" Type="int" />
+          <Property Name="FechaPeticion" Type="datetime" />
+          <Property Name="FechaTomado" Type="datetime" />
+          <Property Name="FechaFinalizado" Type="datetime" />
+          <Property Name="NivelSatisfaccion" Type="int" />
+          <Property Name="CodigoServicio" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdCliente" Type="uniqueidentifier" />
+          <Property Name="IdEmpresa" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="tblServicioEmpleado">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdEmpleado" Type="uniqueidentifier" />
+          <Property Name="IdTipoServicio" Type="int" />
+          <Property Name="EsActivo" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTipoServicio">
+          <Key>
+            <PropertyRef Name="IdTipoServicio" />
+          </Key>
+          <Property Name="IdTipoServicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreTipoServicio" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Complejidad" Type="int" />
+          <Property Name="TiempoEstimado" Type="int" />
+          <Property Name="EsActivo" Type="bit" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdEmpresa" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="tblUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblEmplea__IdEmp__03F0984C">
+          <End Role="tblEmpresa" Type="Self.tblEmpresa" Multiplicity="0..1" />
+          <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblEmpleado">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmplea__IdUsu__2A4B4B5E">
+          <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="0..1" />
+          <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblEmpleado">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmpres__IdUsu__02FC7413">
+          <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="0..1" />
+          <End Role="tblEmpresa" Type="Self.tblEmpresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblEmpresa">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdCli__5CD6CB2B">
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="0..1" />
+          <End Role="tblServicio" Type="Self.tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEmp__04E4BC85">
+          <End Role="tblEmpresa" Type="Self.tblEmpresa" Multiplicity="0..1" />
+          <End Role="tblServicio" Type="Self.tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEmp__2B3F6F97">
+          <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="0..1" />
+          <End Role="tblServicio" Type="Self.tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpleado">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEmp__2F10007B">
+          <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="0..1" />
+          <End Role="tblServicioEmpleado" Type="Self.tblServicioEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpleado">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicioEmpleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEst__2C3393D0">
+          <End Role="mas_tblEstadoServicio" Type="Self.mas_tblEstadoServicio" Multiplicity="0..1" />
+          <End Role="tblServicio" Type="Self.tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mas_tblEstadoServicio">
+              <PropertyRef Name="IdEstadoServicio" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdEstadoServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdTip__2D27B809">
+          <End Role="tblTipoServicio" Type="Self.tblTipoServicio" Multiplicity="0..1" />
+          <End Role="tblServicio" Type="Self.tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoServicio">
+              <PropertyRef Name="IdTipoServicio" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdTipoServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdTip__300424B4">
+          <End Role="tblTipoServicio" Type="Self.tblTipoServicio" Multiplicity="0..1" />
+          <End Role="tblServicioEmpleado" Type="Self.tblServicioEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoServicio">
+              <PropertyRef Name="IdTipoServicio" />
+            </Principal>
+            <Dependent Role="tblServicioEmpleado">
+              <PropertyRef Name="IdTipoServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTipoSe__IdEmp__05D8E0BE">
+          <End Role="tblEmpresa" Type="Self.tblEmpresa" Multiplicity="0..1" />
+          <End Role="tblTipoServicio" Type="Self.tblTipoServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblTipoServicio">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbMagicCraftingTurneraModelStoreContainer">
+          <EntitySet Name="mas_tblEstadoServicio" EntityType="Self.mas_tblEstadoServicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCliente" EntityType="Self.tblCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmpleado" EntityType="Self.tblEmpleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmpresa" EntityType="Self.tblEmpresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblServicio" EntityType="Self.tblServicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblServicioEmpleado" EntityType="Self.tblServicioEmpleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTipoServicio" EntityType="Self.tblTipoServicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblEmplea__IdEmp__03F0984C" Association="Self.FK__tblEmplea__IdEmp__03F0984C">
+            <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+            <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmplea__IdUsu__2A4B4B5E" Association="Self.FK__tblEmplea__IdUsu__2A4B4B5E">
+            <End Role="tblUsuario" EntitySet="tblUsuario" />
+            <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmpres__IdUsu__02FC7413" Association="Self.FK__tblEmpres__IdUsu__02FC7413">
+            <End Role="tblUsuario" EntitySet="tblUsuario" />
+            <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdCli__5CD6CB2B" Association="Self.FK__tblServic__IdCli__5CD6CB2B">
+            <End Role="tblCliente" EntitySet="tblCliente" />
+            <End Role="tblServicio" EntitySet="tblServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEmp__04E4BC85" Association="Self.FK__tblServic__IdEmp__04E4BC85">
+            <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+            <End Role="tblServicio" EntitySet="tblServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEmp__2B3F6F97" Association="Self.FK__tblServic__IdEmp__2B3F6F97">
+            <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+            <End Role="tblServicio" EntitySet="tblServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEmp__2F10007B" Association="Self.FK__tblServic__IdEmp__2F10007B">
+            <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+            <End Role="tblServicioEmpleado" EntitySet="tblServicioEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEst__2C3393D0" Association="Self.FK__tblServic__IdEst__2C3393D0">
+            <End Role="mas_tblEstadoServicio" EntitySet="mas_tblEstadoServicio" />
+            <End Role="tblServicio" EntitySet="tblServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdTip__2D27B809" Association="Self.FK__tblServic__IdTip__2D27B809">
+            <End Role="tblTipoServicio" EntitySet="tblTipoServicio" />
+            <End Role="tblServicio" EntitySet="tblServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdTip__300424B4" Association="Self.FK__tblServic__IdTip__300424B4">
+            <End Role="tblTipoServicio" EntitySet="tblTipoServicio" />
+            <End Role="tblServicioEmpleado" EntitySet="tblServicioEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTipoSe__IdEmp__05D8E0BE" Association="Self.FK__tblTipoSe__IdEmp__05D8E0BE">
+            <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+            <End Role="tblTipoServicio" EntitySet="tblTipoServicio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbMagicCraftingTurneraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TurneraEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EstadoServicio" EntityType="dbMagicCraftingTurneraModel.EstadoServicio" />
+          <EntitySet Name="Cliente" EntityType="dbMagicCraftingTurneraModel.Cliente" />
+          <EntitySet Name="Empleado" EntityType="dbMagicCraftingTurneraModel.Empleado" />
+          <EntitySet Name="Empresa" EntityType="dbMagicCraftingTurneraModel.Empresa" />
+          <EntitySet Name="Servicio" EntityType="dbMagicCraftingTurneraModel.Servicio" />
+          <EntitySet Name="ServicioEmpleado" EntityType="dbMagicCraftingTurneraModel.ServicioEmpleado" />
+          <EntitySet Name="TipoServicio" EntityType="dbMagicCraftingTurneraModel.TipoServicio" />
+          <EntitySet Name="Usuario" EntityType="dbMagicCraftingTurneraModel.Usuario" />
+          <AssociationSet Name="FK__tblServic__IdEst__2C3393D0" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEst__2C3393D0">
+            <End Role="mas_tblEstadoServicio" EntitySet="EstadoServicio" />
+            <End Role="tblServicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdCli__5CD6CB2B" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdCli__5CD6CB2B">
+            <End Role="tblCliente" EntitySet="Cliente" />
+            <End Role="tblServicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmplea__IdEmp__03F0984C" Association="dbMagicCraftingTurneraModel.FK__tblEmplea__IdEmp__03F0984C">
+            <End Role="tblEmpresa" EntitySet="Empresa" />
+            <End Role="tblEmpleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmplea__IdUsu__2A4B4B5E" Association="dbMagicCraftingTurneraModel.FK__tblEmplea__IdUsu__2A4B4B5E">
+            <End Role="tblUsuario" EntitySet="Usuario" />
+            <End Role="tblEmpleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEmp__2B3F6F97" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2B3F6F97">
+            <End Role="tblEmpleado" EntitySet="Empleado" />
+            <End Role="tblServicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEmp__2F10007B" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2F10007B">
+            <End Role="tblEmpleado" EntitySet="Empleado" />
+            <End Role="tblServicioEmpleado" EntitySet="ServicioEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmpres__IdUsu__02FC7413" Association="dbMagicCraftingTurneraModel.FK__tblEmpres__IdUsu__02FC7413">
+            <End Role="tblUsuario" EntitySet="Usuario" />
+            <End Role="tblEmpresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdEmp__04E4BC85" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__04E4BC85">
+            <End Role="tblEmpresa" EntitySet="Empresa" />
+            <End Role="tblServicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTipoSe__IdEmp__05D8E0BE" Association="dbMagicCraftingTurneraModel.FK__tblTipoSe__IdEmp__05D8E0BE">
+            <End Role="tblEmpresa" EntitySet="Empresa" />
+            <End Role="tblTipoServicio" EntitySet="TipoServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdTip__2D27B809" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__2D27B809">
+            <End Role="tblTipoServicio" EntitySet="TipoServicio" />
+            <End Role="tblServicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblServic__IdTip__300424B4" Association="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__300424B4">
+            <End Role="tblTipoServicio" EntitySet="TipoServicio" />
+            <End Role="tblServicioEmpleado" EntitySet="ServicioEmpleado" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EstadoServicio">
+          <Key>
+            <PropertyRef Name="IdEstadoServicio" />
+          </Key>
+          <Property Name="IdEstadoServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEstadoServicio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EsActivo" Type="Boolean" />
+          <NavigationProperty Name="tblServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEst__2C3393D0" FromRole="mas_tblEstadoServicio" ToRole="tblServicio" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PushRegistrationId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdCli__5CD6CB2B" FromRole="tblCliente" ToRole="tblServicio" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroCelular" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EsActivo" Type="Boolean" />
+          <Property Name="IdEmpresa" Type="Guid" />
+          <NavigationProperty Name="tblEmpresa" Relationship="dbMagicCraftingTurneraModel.FK__tblEmplea__IdEmp__03F0984C" FromRole="tblEmpleado" ToRole="tblEmpresa" />
+          <NavigationProperty Name="tblUsuario" Relationship="dbMagicCraftingTurneraModel.FK__tblEmplea__IdUsu__2A4B4B5E" FromRole="tblEmpleado" ToRole="tblUsuario" />
+          <NavigationProperty Name="tblServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2B3F6F97" FromRole="tblEmpleado" ToRole="tblServicio" />
+          <NavigationProperty Name="tblServicioEmpleado" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2F10007B" FromRole="tblEmpleado" ToRole="tblServicioEmpleado" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TokenUnico" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UrlImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroTelefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroCelular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Longitud" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Latitud" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblEmpleado" Relationship="dbMagicCraftingTurneraModel.FK__tblEmplea__IdEmp__03F0984C" FromRole="tblEmpresa" ToRole="tblEmpleado" />
+          <NavigationProperty Name="tblUsuario" Relationship="dbMagicCraftingTurneraModel.FK__tblEmpres__IdUsu__02FC7413" FromRole="tblEmpresa" ToRole="tblUsuario" />
+          <NavigationProperty Name="tblServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__04E4BC85" FromRole="tblEmpresa" ToRole="tblServicio" />
+          <NavigationProperty Name="tblTipoServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblTipoSe__IdEmp__05D8E0BE" FromRole="tblEmpresa" ToRole="tblTipoServicio" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Guid" />
+          <Property Name="IdTipoServicio" Type="Int32" />
+          <Property Name="IdEstadoServicio" Type="Int32" />
+          <Property Name="FechaPeticion" Type="DateTime" Precision="3" />
+          <Property Name="FechaTomado" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinalizado" Type="DateTime" Precision="3" />
+          <Property Name="NivelSatisfaccion" Type="Int32" />
+          <Property Name="CodigoServicio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdCliente" Type="Guid" />
+          <Property Name="IdEmpresa" Type="Guid" />
+          <NavigationProperty Name="mas_tblEstadoServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEst__2C3393D0" FromRole="tblServicio" ToRole="mas_tblEstadoServicio" />
+          <NavigationProperty Name="tblCliente" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdCli__5CD6CB2B" FromRole="tblServicio" ToRole="tblCliente" />
+          <NavigationProperty Name="tblEmpleado" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2B3F6F97" FromRole="tblServicio" ToRole="tblEmpleado" />
+          <NavigationProperty Name="tblEmpresa" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__04E4BC85" FromRole="tblServicio" ToRole="tblEmpresa" />
+          <NavigationProperty Name="tblTipoServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__2D27B809" FromRole="tblServicio" ToRole="tblTipoServicio" />
+        </EntityType>
+        <EntityType Name="ServicioEmpleado">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Guid" />
+          <Property Name="IdTipoServicio" Type="Int32" />
+          <Property Name="EsActivo" Type="Boolean" />
+          <NavigationProperty Name="tblEmpleado" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2F10007B" FromRole="tblServicioEmpleado" ToRole="tblEmpleado" />
+          <NavigationProperty Name="tblTipoServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__300424B4" FromRole="tblServicioEmpleado" ToRole="tblTipoServicio" />
+        </EntityType>
+        <EntityType Name="TipoServicio">
+          <Key>
+            <PropertyRef Name="IdTipoServicio" />
+          </Key>
+          <Property Name="IdTipoServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreTipoServicio" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Complejidad" Type="Int32" />
+          <Property Name="TiempoEstimado" Type="Int32" />
+          <Property Name="EsActivo" Type="Boolean" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdEmpresa" Type="Guid" />
+          <NavigationProperty Name="tblEmpresa" Relationship="dbMagicCraftingTurneraModel.FK__tblTipoSe__IdEmp__05D8E0BE" FromRole="tblTipoServicio" ToRole="tblEmpresa" />
+          <NavigationProperty Name="tblServicio" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__2D27B809" FromRole="tblTipoServicio" ToRole="tblServicio" />
+          <NavigationProperty Name="tblServicioEmpleado" Relationship="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__300424B4" FromRole="tblTipoServicio" ToRole="tblServicioEmpleado" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblEmpleado" Relationship="dbMagicCraftingTurneraModel.FK__tblEmplea__IdUsu__2A4B4B5E" FromRole="tblUsuario" ToRole="tblEmpleado" />
+          <NavigationProperty Name="tblEmpresa" Relationship="dbMagicCraftingTurneraModel.FK__tblEmpres__IdUsu__02FC7413" FromRole="tblUsuario" ToRole="tblEmpresa" />
+        </EntityType>
+        <Association Name="FK__tblServic__IdEst__2C3393D0">
+          <End Type="dbMagicCraftingTurneraModel.EstadoServicio" Role="mas_tblEstadoServicio" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Servicio" Role="tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mas_tblEstadoServicio">
+              <PropertyRef Name="IdEstadoServicio" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdEstadoServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdCli__5CD6CB2B">
+          <End Type="dbMagicCraftingTurneraModel.Cliente" Role="tblCliente" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Servicio" Role="tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmplea__IdEmp__03F0984C">
+          <End Type="dbMagicCraftingTurneraModel.Empresa" Role="tblEmpresa" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Empleado" Role="tblEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblEmpleado">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmplea__IdUsu__2A4B4B5E">
+          <End Type="dbMagicCraftingTurneraModel.Usuario" Role="tblUsuario" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Empleado" Role="tblEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblEmpleado">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEmp__2B3F6F97">
+          <End Type="dbMagicCraftingTurneraModel.Empleado" Role="tblEmpleado" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Servicio" Role="tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpleado">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEmp__2F10007B">
+          <End Type="dbMagicCraftingTurneraModel.Empleado" Role="tblEmpleado" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.ServicioEmpleado" Role="tblServicioEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpleado">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicioEmpleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmpres__IdUsu__02FC7413">
+          <End Type="dbMagicCraftingTurneraModel.Usuario" Role="tblUsuario" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Empresa" Role="tblEmpresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblEmpresa">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdEmp__04E4BC85">
+          <End Type="dbMagicCraftingTurneraModel.Empresa" Role="tblEmpresa" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Servicio" Role="tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTipoSe__IdEmp__05D8E0BE">
+          <End Type="dbMagicCraftingTurneraModel.Empresa" Role="tblEmpresa" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.TipoServicio" Role="tblTipoServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="tblTipoServicio">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdTip__2D27B809">
+          <End Type="dbMagicCraftingTurneraModel.TipoServicio" Role="tblTipoServicio" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.Servicio" Role="tblServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoServicio">
+              <PropertyRef Name="IdTipoServicio" />
+            </Principal>
+            <Dependent Role="tblServicio">
+              <PropertyRef Name="IdTipoServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblServic__IdTip__300424B4">
+          <End Type="dbMagicCraftingTurneraModel.TipoServicio" Role="tblTipoServicio" Multiplicity="0..1" />
+          <End Type="dbMagicCraftingTurneraModel.ServicioEmpleado" Role="tblServicioEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoServicio">
+              <PropertyRef Name="IdTipoServicio" />
+            </Principal>
+            <Dependent Role="tblServicioEmpleado">
+              <PropertyRef Name="IdTipoServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbMagicCraftingTurneraModelStoreContainer" CdmEntityContainer="TurneraEntities">
+          <EntitySetMapping Name="EstadoServicio">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.EstadoServicio">
+              <MappingFragment StoreEntitySet="mas_tblEstadoServicio">
+                <ScalarProperty Name="EsActivo" ColumnName="EsActivo" />
+                <ScalarProperty Name="NombreEstadoServicio" ColumnName="NombreEstadoServicio" />
+                <ScalarProperty Name="IdEstadoServicio" ColumnName="IdEstadoServicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.Cliente">
+              <MappingFragment StoreEntitySet="tblCliente">
+                <ScalarProperty Name="PushRegistrationId" ColumnName="PushRegistrationId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.Empleado">
+              <MappingFragment StoreEntitySet="tblEmpleado">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="EsActivo" ColumnName="EsActivo" />
+                <ScalarProperty Name="NumeroCelular" ColumnName="NumeroCelular" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.Empresa">
+              <MappingFragment StoreEntitySet="tblEmpresa">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NumeroCelular" ColumnName="NumeroCelular" />
+                <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+                <ScalarProperty Name="UrlImagen" ColumnName="UrlImagen" />
+                <ScalarProperty Name="TokenUnico" ColumnName="TokenUnico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicio">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.Servicio">
+              <MappingFragment StoreEntitySet="tblServicio">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="CodigoServicio" ColumnName="CodigoServicio" />
+                <ScalarProperty Name="NivelSatisfaccion" ColumnName="NivelSatisfaccion" />
+                <ScalarProperty Name="FechaFinalizado" ColumnName="FechaFinalizado" />
+                <ScalarProperty Name="FechaTomado" ColumnName="FechaTomado" />
+                <ScalarProperty Name="FechaPeticion" ColumnName="FechaPeticion" />
+                <ScalarProperty Name="IdEstadoServicio" ColumnName="IdEstadoServicio" />
+                <ScalarProperty Name="IdTipoServicio" ColumnName="IdTipoServicio" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicioEmpleado">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.ServicioEmpleado">
+              <MappingFragment StoreEntitySet="tblServicioEmpleado">
+                <ScalarProperty Name="EsActivo" ColumnName="EsActivo" />
+                <ScalarProperty Name="IdTipoServicio" ColumnName="IdTipoServicio" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoServicio">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.TipoServicio">
+              <MappingFragment StoreEntitySet="tblTipoServicio">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="EsActivo" ColumnName="EsActivo" />
+                <ScalarProperty Name="TiempoEstimado" ColumnName="TiempoEstimado" />
+                <ScalarProperty Name="Complejidad" ColumnName="Complejidad" />
+                <ScalarProperty Name="NombreTipoServicio" ColumnName="NombreTipoServicio" />
+                <ScalarProperty Name="IdTipoServicio" ColumnName="IdTipoServicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="dbMagicCraftingTurneraModel.Usuario">
+              <MappingFragment StoreEntitySet="tblUsuario">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

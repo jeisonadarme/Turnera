@@ -1,0 +1,75 @@
+﻿@using JeisonAdarme.BLL.Model.UI
+@model  RegisterBindingModel
+
+
+
+
+<div class="col-lg-8 col-lg-offset-2" id="register" style="display:none;">
+    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+    <label>Todos lo datos son requeridos <a href="javascript: void(0);" id="btnLogin">Regresar</a>.</label>
+
+    @using (Ajax.BeginForm("Register", "Account", null,
+                    new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "divMessage",
+                        InsertionMode = InsertionMode.Replace,
+                        OnBegin = "showLoading",
+                        OnSuccess = "hideLoading",
+                        OnFailure = "hideLoadingError"
+                    }, new { @id = "formRegister", @name = "formRegister", FormMethod.Post }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Nombre</label>
+                @*<input type="text" class="" placeholder="Nombre" id="name" required data-validation-required-message="Please enter your Email.">*@
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor ingresa tu nombre.", @placeholder = "Nombre" })
+                @Html.ValidationMessageFor(m => m.Nombre)
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>E-mail</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor ingresa tu E-mail.", @placeholder = "E-mail", @type = "email" })
+                @Html.ValidationMessageFor(m => m.Email)
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Contraseña</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor ingresa tu contraseña.", @placeholder = "Contraseña" })
+                @Html.ValidationMessageFor(m => m.Password)
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Confirmar Contraseña</label>
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor confirme la contraseña..", @placeholder = "Confirmar Contraseña" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+    <label>Para hubicar tu negocio en el mapa haz click <a  id="btnNaps" onclick="javascript: initMap()" class="portfolio-link portfolio-links" data-toggle="modal">aquí</a></label>
+   
+        <br />
+        <div class="row control-group">
+            <div class="g-recaptcha" data-sitekey="6LduaRUTAAAAAP5nbB_ADckgkaImoRJp-fnOCM1w"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" class="btn btn-success ">Registrarme</button>
+            </div>
+        </div>
+        <div id="divMessage">
+
+        </div>
+    }
+</div>
+

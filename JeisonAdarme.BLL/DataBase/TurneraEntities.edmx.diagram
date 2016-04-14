@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51d6cc0afc8f4008a13aecc18cdf2999" Name="Diagram1">
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.EstadoServicio" Width="1.5" PointX="8.25" PointY="11.75" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.Cliente" Width="1.5" PointX="8.25" PointY="5" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.Empleado" Width="1.5" PointX="5.25" PointY="5.625" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.Empresa" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.Servicio" Width="1.5" PointX="10.5" PointY="7.25" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.ServicioEmpleado" Width="1.5" PointX="7.5" PointY="7.875" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.TipoServicio" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="dbMagicCraftingTurneraModel.Usuario" Width="1.5" PointX="0.75" PointY="5.25" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEst__2C3393D0" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdCli__5CD6CB2B" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblEmplea__IdEmp__03F0984C" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblEmplea__IdUsu__2A4B4B5E" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2B3F6F97" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__2F10007B" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblEmpres__IdUsu__02FC7413" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdEmp__04E4BC85" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblTipoSe__IdEmp__05D8E0BE" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__2D27B809" />
+        <AssociationConnector Association="dbMagicCraftingTurneraModel.FK__tblServic__IdTip__300424B4" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<JeisonAdarme.BLL.DataBase.TipoServicio>
+
+@if (Model.Any())
+{
+    <div class="col-lg-8 col-lg-offset-2">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Nombre Servicio
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreTipoServicio)
+                    </td>
+
+                    <td>
+                        <a data-ajax="true" data-ajax-begin="showLoading" data-ajax-failure="hideLoadingError"
+                           data-ajax-method="Get" data-ajax-mode="replace" data-ajax-success="hideLoading" data-ajax-update="#CreateTypeServices"
+                           href="@Url.Action("Delete", "TypeService", new { id = item.IdTipoServicio })">
+                           Eliminar
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}

@@ -1,0 +1,112 @@
+﻿
+@model JeisonAdarme.BLL.Model.UI.QrCodesModelView
+<!-- Portfolio Grid Section -->
+
+
+        <div id="divQrCodes">
+            @*<div class="col-sm-6 portfolio-item">
+                <label class="portfolio-link">Esto código <strong>QR</strong> espara tus colaboradores.</label>
+                <br />
+                <a href="#portfolioModal1" class="portfolio-link portfolio-links" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                        </div>
+                    </div>
+                   
+                    <div id="qrCodeEmpleados" class="img-responsive"></div>
+                </a>
+            </div>*@
+            <div class="col-sm-12 portfolio-item">
+                <label class="portfolio-link">Esto código <strong>QR</strong> espara tus clientes.</label>
+                <br />
+                <a href="#portfolioModal2" class="portfolio-link portfolio-links" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                        </div>
+                    </div>
+                   
+                    <div id="qrCodeClientes" class="img-responsive"></div>
+                </a>
+            </div>
+        </div>
+
+
+
+    <!-- Portfolio Modals -->
+@*<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>QR Colaboradores</h2>
+                        <hr class="star-primary">
+                        <div id="qrCodeEmpleados2" class="img-responsive img-centered portfolio-link"></div>
+                        <br />
+                        <p>Crear el copy</p>
+                      
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>QR Clientes</h2>
+                        <hr class="star-primary">
+                        <div id="qrCodeClientes2" class="img-responsive img-centered portfolio-link"></div>
+                        <br />
+                        <p>Crear el copy</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+    $(document).ready(function () {
+
+        var tamano = 500;
+            //$('#portfolio').width();
+    var ancho = $(window).width()
+
+    if (ancho <= 414) {
+        tamano = ancho - 60;
+
+    }
+
+    console.log(tamano);
+
+    $('#qrCodeClientes, #qrCodeClientes2').qrcode({
+            "color": "#3a3",
+            "size": tamano,
+            "text": "@(Model.CodeService)"
+        });
+    });
+
+</script>

@@ -1,0 +1,42 @@
+﻿@model  JeisonAdarme.BLL.Model.WSI.RegisterTyepeServiceBindingModel
+
+
+
+<div class="col-lg-8 col-lg-offset-2" id="TypeService">
+    <label>Crea los servicios que ofreces para que tus clientes puedan pedir su turno.</label>
+    @using (Ajax.BeginForm("CreateTypeService", "TypeService", null,
+                    new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "CreateTypeServices",
+                        InsertionMode = InsertionMode.Replace,
+                        OnBegin = "showLoading",
+                        OnSuccess = "hideLoading",
+                        OnFailure = "hideLoadingError"
+                    }, new { @id = "formRegister", @name = "formRegister", FormMethod.Post }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Nombre Servicio</label>
+                @Html.TextBoxFor(m => m.NombreTipoServicio, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor ingrese el nombre.", @placeholder = "Nombre Servicio" })
+                @Html.ValidationMessageFor(m => m.NombreTipoServicio)
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+@{
+
+    Html.RenderAction("GetTypesServices", "TypeService");
+}

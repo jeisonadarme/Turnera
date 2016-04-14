@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@{
+    if (Request.IsAuthenticated)
+    {
+
+        Html.RenderPartial("_CorePartial");
+    }
+    else
+    {
+        Html.RenderPartial("_AccountSectionPartial");
+    }
+}

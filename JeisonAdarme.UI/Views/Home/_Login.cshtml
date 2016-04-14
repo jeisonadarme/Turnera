@@ -1,0 +1,50 @@
+﻿@model JeisonAdarme.UI.Models.LoginViewModel
+
+<div class="col-lg-8 col-lg-offset-2" id="login">
+	<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+	<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+	<label>Ingresa los datos, Si no tienes cuenta haz click <a href="javascript: void(0);" id="btnRegister">Aquí.</a></label>
+
+	@using (Ajax.BeginForm("Login", "Account", null,
+					new AjaxOptions()
+					{
+						HttpMethod = "POST",
+						UpdateTargetId = "divMessage",
+						InsertionMode = InsertionMode.Replace,
+						OnBegin = "showLoading",
+						OnSuccess = "hideLoading",
+						OnFailure = "hideLoadingError"
+					}, new { @id = "formRegister", @name = "formRegister", FormMethod.Post }))
+	{
+@*@using (Html.BeginForm("Login", "Account", FormMethod.Post, new {  @role = "form" }))
+{*@
+		@Html.AntiForgeryToken()
+
+		<div class="row control-group">
+			<div class="form-group col-xs-12 floating-label-form-group controls">
+				<label>E-mail</label>
+				@*<input type="text" class="form-control" placeholder="E-mail" id="name" required data-validation-required-message="Please enter your Email.">*@
+				@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor ingresa tu E-mail.", @placeholder = "E-mail", @type = "email" })
+				@Html.ValidationMessageFor(m => m.Email)
+				<p class="help-block text-danger"></p>
+			</div>
+		</div>
+		<div class="row control-group">
+			<div class="form-group col-xs-12 floating-label-form-group controls">
+				<label>Contraseña</label>
+				@*<input type="email" class="form-control" placeholder="Contraseña" id="email" required data-validation-required-message="Please enter your Contraseña.">*@
+				@Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "required", @data_validation_required_message = "Por favor ingresa tu contraseña.", @placeholder = "Contraseña" })
+				@Html.ValidationMessageFor(m => m.Password)
+				<p class="help-block text-danger"></p>
+			</div>
+		</div>
+        
+		<br>
+		<div id="success"></div>
+		<div class="row">
+			<div class="form-group col-xs-12">
+				<button type="submit" class="btn btn-success">Ingresar</button>
+			</div>
+		</div>
+	}
+</div>

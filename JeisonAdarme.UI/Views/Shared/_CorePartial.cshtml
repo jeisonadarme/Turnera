@@ -1,0 +1,105 @@
+﻿
+
+
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Servicios</a></li>
+        <li><a href="#tabs-2">Código QR</a></li>
+        <li><a href="#tabs-3">Colaboradores</a></li>
+        <li><a href="#tabs-4">Turnos</a></li>
+        <li><a href="#tabs-5">Mi Perfil</a></li>
+    </ul>
+
+    <div id="tabs-1">
+        <section id="Services">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 id="NombreTitulo">Servicios</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+
+                <div class="row" id="CreateTypeServices">
+                    @{Html.RenderAction("CreateTypeService", "TypeService");}
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="tabs-2">
+        <section id="portfolio">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 id="NombreTitulo">CÓDIGO QR</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+                <div class="row">
+                    @{
+                        Html.RenderAction("GenerateQrCode", "Home");
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="tabs-3">
+        <section id="colaboradores">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 id="NombreTitulo">COLABORADORES</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+                <div class="row">
+                    @{
+                        Html.RenderAction("Index", "Employee");
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="tabs-4">
+        <section id="turnos">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 id="NombreTitulo">TURNOS</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+                <div class="row">
+                    @*@{
+                            Html.RenderAction("GenerateQrCode", "Home");
+                        }*@
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="tabs-5">
+        <section id="perfil">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 id="NombreTitulo">Mi Perfil</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+                <div class="row">
+                    @*@{
+                            Html.RenderAction("GenerateQrCode", "Home");
+                        }*@
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
